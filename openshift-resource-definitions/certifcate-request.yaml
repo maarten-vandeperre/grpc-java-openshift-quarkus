@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  namespace: maarten-playground
+  name: letsencrypt-production-certificate
+spec:
+  secretName: letsencrypt-production-certificate
+  duration: 2160h0m0s # 90d
+  renewBefore: 360h0m0s # 15d
+  organization:
+    - "redhat"
+  keySize: 2048
+  keyAlgorithm: rsa
+  keyEncoding: pkcs1
+  usages:
+    - server auth
+    - client auth
+  # At least one of a DNS Name, URI, or IP address is required.
+  dnsNames:
+    - quarkus-grpc-maarten-playground.apps.ocp4-bm.redhat.arrowlabs.be
+    - quarkus-https-maarten-playground.apps.ocp4-bm.redhat.arrowlabs.be
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

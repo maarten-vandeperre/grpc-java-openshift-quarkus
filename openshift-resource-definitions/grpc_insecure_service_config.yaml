@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: quarkus-grpc-insecure
+  namespace: maarten-playground
+  labels:
+    app: quarkus-grpc
+    app.kubernetes.io/component: quarkus-grpc
+    app.kubernetes.io/instance: quarkus-grpc
+    app.kubernetes.io/name: quarkus-grpc
+    app.kubernetes.io/part-of: quarkus-grpc
+spec:
+  ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: quarkus-grpc
+    deployment: quarkus-grpc
+  type: ClusterIP
